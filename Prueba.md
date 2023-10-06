@@ -1,11 +1,13 @@
 Guía Definitiva para el Marketing Mix Modelling
 ================
 
-## GitHub Documents
+## Introducción
 
-This is an R Markdown format used for publishing markdown documents to
-GitHub. When you click the **Knit** button all R code chunks are run and
-a markdown file (.md) suitable for publishing to GitHub is generated.
+Ya sea que se trate de una empresa establecida o bastante nueva en el
+mercado, casi todas las empresas utilizan diferentes canales de
+marketing como televisión, radio, correo electrónico, redes sociales,
+etc., para llegar a sus clientes potenciales y aumentar el conocimiento
+de su producto y, a su vez, maximizar las ventas o ingresos.
 
 ## Including Code
 
