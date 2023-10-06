@@ -63,9 +63,20 @@ comportamiento estacional de días cálidos en verano y días fríos en
 invierno, etc.
 
 ``` r
-#library(forecast)
-#ggseasonplot(AirPassengers)
+library(forecast)
 ```
+
+    ## Warning: package 'forecast' was built under R version 4.2.3
+
+    ## Registered S3 method overwritten by 'quantmod':
+    ##   method            from
+    ##   as.zoo.data.frame zoo
+
+``` r
+ggseasonplot(AirPassengers)
+```
+
+![](Prueba_files/figure-gfm/cars-1.png)<!-- -->
 
 ## Including Plots
 
