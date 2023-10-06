@@ -135,6 +135,49 @@ InputCollect <- robyn_inputs(
 print(InputCollect)
 ```
 
+``` 6
+hyper_names(adstock = InputCollect$adstock, all_media = InputCollect$all_media)
+
+## Note: Set plot = TRUE to produce example plots for 
+#adstock & saturation hyperparameters.
+
+plot_adstock(plot = FALSE)
+plot_saturation(plot = FALSE)
+
+# To check maximum lower and upper bounds
+hyper_limits()
+```
+
+``` 7
+# Specify hyperparameters ranges for Geometric adstock
+hyperparameters <- list(
+  facebook_S_alphas = c(0.5, 3),
+  facebook_S_gammas = c(0.3, 1),
+  facebook_S_thetas = c(0, 0.3),
+  print_S_alphas = c(0.5, 3),
+  print_S_gammas = c(0.3, 1),
+  print_S_thetas = c(0.1, 0.4),
+  tv_S_alphas = c(0.5, 3),
+  tv_S_gammas = c(0.3, 1),
+  tv_S_thetas = c(0.3, 0.8),
+  search_S_alphas = c(0.5, 3),
+  search_S_gammas = c(0.3, 1),
+  search_S_thetas = c(0, 0.3),
+  ooh_S_alphas = c(0.5, 3),
+  ooh_S_gammas = c(0.3, 1),
+  ooh_S_thetas = c(0.1, 0.4),
+  newsletter_alphas = c(0.5, 3),
+  newsletter_gammas = c(0.3, 1),
+  newsletter_thetas = c(0.1, 0.4),
+  train_size = c(0.5, 0.8)
+)
+
+#Add hyperparameters into robyn_inputs()
+
+InputCollect <- robyn_inputs(InputCollect = InputCollect, hyperparameters = hyperparameters)
+print(InputCollect)
+```
+
 ## Including Plots
 
 You can also embed plots, for example:
