@@ -78,6 +78,63 @@ py_install("nevergrad", pip = TRUE)
 use_virtualenv("r-reticulate", required = TRUE)
 ```
 
+``` 3
+use_python("~/Library/r-miniconda/envs/r-reticulate/bin/python")
+```
+
+``` 4
+#Step 1.c Import packages & set CWD
+library(Robyn) 
+library(reticulate)
+set.seed(123)
+
+setwd("E:/DataScience/MMM")
+
+#Step 1.d You can force multi-core usage by running below line of code
+Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
+options(future.fork.enable = TRUE)
+
+# You can set create_files to FALSE to avoid the creation of files locally
+create_files <- TRUE
+```
+
+``` 5
+#Step 2.a Load data
+data("dt_simulated_weekly")
+head(dt_simulated_weekly)
+
+#Step 2.b Load holidays data from Prophet
+data("dt_prophet_holidays")
+head(dt_prophet_holidays)
+
+# Export results to desired directory.
+robyn_object<- "~/MyRobyn.RDS"
+```
+
+``` 5
+#### Step 3.1: Specify input variables
+
+InputCollect <- robyn_inputs(
+  dt_input = dt_simulated_weekly,
+  dt_holidays = dt_prophet_holidays,
+  dep_var = "revenue",
+  dep_var_type = "revenue",
+  date_var = "DATE",
+  prophet_country = "DE",
+  prophet_vars = c("trend", "season", "holiday"), 
+  context_vars = c("competitor_sales_B", "events"),
+  paid_media_vars = c("tv_S", "ooh_S", "print_S", "facebook_I", "search_clicks_P"),
+  paid_media_spends = c("tv_S", "ooh_S", "print_S", "facebook_S", "search_S"),
+  organic_vars = "newsletter", 
+  # factor_vars = c("events"),
+  adstock = "geometric", 
+  window_start = "2016-01-01",
+  window_end = "2018-12-31",
+  
+)
+print(InputCollect)
+```
+
 ## Including Plots
 
 You can also embed plots, for example:
