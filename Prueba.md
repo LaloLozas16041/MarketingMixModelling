@@ -17,50 +17,55 @@ y herramientas de big data, el marketing es una de las áreas de
 oportunidades más destacadas para las aplicaciones de ciencia de datos y
 aprendizaje automático.
 
-Objetivos de aprendizaje
-
+<strong>Objetivos de aprendizaje</strong>
+</p>
 <ol>
 <li>
-¿Qué es el modelado de mezcla de mercado y por qué MMM con Robyn es
-mejor que un MMM tradicional?
+¿Qué es el Marketing Mix Modelling y por qué MMM con Robyn es mejor que
+un MMM tradicional?
 </li>
 <li>
-Carmen
+Componentes de las series temporales: tendencia, estacionalidad,
+ciclicidad, ruido, etc.
 </li>
 <li>
-Ignacio
+Adstocks publicitarios: efecto de arrastre y efecto de rendimientos
+decrecientes, y transformación de Adstock: geométrico, Weibull CDF y
+Weibull PDF.
 </li>
 <li>
-Elena
+¿Qué son la optimización sin gradientes y la optimización de
+hiperparámetros multiobjetivo con Nevergrad?
+</li>
+<li>
+Implementación del Marketing Mix Modelling utilizando Robyn.
 </li>
 </ol>
 
-Componentes de las series temporales: tendencia, estacionalidad,
-ciclicidad, ruido, etc. Adstocks publicitarios: efecto de arrastre y
-efecto de rendimientos decrecientes, y transformación de Adstock:
-geométrico, Weibull CDF y Weibull PDF. ¿Qué son la optimización sin
-gradientes y la optimización de hiperparámetros multiobjetivo con
-Nevergrad? Implementación del modelo Market Mix utilizando Robyn.
 Entonces, sin más preámbulos, demos el primer paso para comprender cómo
-implementar el modelo Market mix utilizando la biblioteca Robyn
+implementar el Marketing Mix Modelling utilizando la biblioteca Robyn
 desarrollada por el equipo de Facebook (ahora Meta) y, lo más
 importante, cómo interpretar los resultados de salida.
 
-## Including Code
+## Estacionalidad
 
-You can include R code in the document as follows:
+Si observa un ciclo periódico en la serie con frecuencias fijas,
+entonces puede decir que hay una estacionalidad en los datos. Estas
+frecuencias pueden ser diarias, semanales, mensuales, etc. En palabras
+simples, la estacionalidad siempre es de un período fijo y conocido, lo
+que significa que notará una cantidad de tiempo definida entre los picos
+y los valles de los datos; ergo, a veces, las series de tiempo
+estacionales también se denominan series de tiempo periódicas.
+
+Por ejemplo, las ventas minoristas aumentan en algunos festivales o
+eventos en particular, o la temperatura del clima muestra su
+comportamiento estacional de días cálidos en verano y días fríos en
+invierno, etc.
 
 ``` r
-summary(cars)
+#library(forecast)
+#ggseasonplot(AirPassengers)
 ```
-
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
 
 ## Including Plots
 
