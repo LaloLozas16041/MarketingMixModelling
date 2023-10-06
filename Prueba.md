@@ -62,21 +62,21 @@ eventos en particular, o la temperatura del clima muestra su
 comportamiento estacional de días cálidos en verano y días fríos en
 invierno, etc.
 
-``` r
-library(forecast)
-```
-
-    ## Warning: package 'forecast' was built under R version 4.2.3
-
-    ## Registered S3 method overwritten by 'quantmod':
-    ##   method            from
-    ##   as.zoo.data.frame zoo
-
-``` r
+``` 2
 ggseasonplot(AirPassengers)
 ```
 
-![](Prueba_files/figure-gfm/cars-1.png)<!-- -->
+``` 2
+#Step 1.a.First Install required Packages
+install.packages("Robyn")
+install.packages("reticulate")
+library(reticulate)
+
+#Step 1.b Setup virtual Environment & Install nevergrad library
+virtualenv_create("r-reticulate")
+py_install("nevergrad", pip = TRUE)
+use_virtualenv("r-reticulate", required = TRUE)
+```
 
 ## Including Plots
 

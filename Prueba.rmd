@@ -31,10 +31,26 @@ Si observa un ciclo periódico en la serie con frecuencias fijas, entonces puede
 
 Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en particular, o la temperatura del clima muestra su comportamiento estacional de días cálidos en verano y días fríos en invierno, etc.
 
-```{r cars}
+```{1, echo = FALSE}
 library(forecast)
+```
+
+```{2}
 ggseasonplot(AirPassengers)
 ```
+
+```{2}
+#Step 1.a.First Install required Packages
+install.packages("Robyn")
+install.packages("reticulate")
+library(reticulate)
+
+#Step 1.b Setup virtual Environment & Install nevergrad library
+virtualenv_create("r-reticulate")
+py_install("nevergrad", pip = TRUE)
+use_virtualenv("r-reticulate", required = TRUE)
+```
+
 
 ## Including Plots
 
