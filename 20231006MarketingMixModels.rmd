@@ -3,9 +3,9 @@ title: "Guía Definitiva para el Marketing Mix Modelling"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+#```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
+#```
 
 ## Introducción
 
