@@ -1,8 +1,6 @@
 Guía Definitiva para el Marketing Mix Modelling
 ================
 
-\#`{r setup, include=FALSE} #knitr::opts_chunk$set(echo = TRUE) #`
-
 ## Introducción
 
 Ya sea que se trate de una empresa establecida o bastante nueva en el
