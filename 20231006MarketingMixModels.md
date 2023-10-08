@@ -66,38 +66,6 @@ invierno, etc.
 ggseasonplot(AirPassengers)
 ```
 
-``` 2
-#Step 1.a.First Install required Packages
-install.packages("Robyn")
-install.packages("reticulate")
-library(reticulate)
-
-#Step 1.b Setup virtual Environment & Install nevergrad library
-virtualenv_create("r-reticulate")
-py_install("nevergrad", pip = TRUE)
-use_virtualenv("r-reticulate", required = TRUE)
-```
-
-``` 3
-use_python("~/Library/r-miniconda/envs/r-reticulate/bin/python")
-```
-
-``` 4
-#Step 1.c Import packages & set CWD
-library(Robyn) 
-library(reticulate)
-set.seed(123)
-
-setwd("E:/DataScience/MMM")
-
-#Step 1.d You can force multi-core usage by running below line of code
-Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
-options(future.fork.enable = TRUE)
-
-# You can set create_files to FALSE to avoid the creation of files locally
-create_files <- TRUE
-```
-
 ## Including Plots
 
 You can also embed plots, for example:
