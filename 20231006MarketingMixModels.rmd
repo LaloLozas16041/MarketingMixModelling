@@ -27,12 +27,12 @@ Si observa un ciclo periódico en la serie con frecuencias fijas, entonces puede
 
 Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en particular, o la temperatura del clima muestra su comportamiento estacional de días cálidos en verano y días fríos en invierno, etc.
 
-```{1, echo = FALSE}
-library(forecast)
-```
+```{r setup, include = FALSE}
+library(ggplot2)
+library(dplyr)
 
-```{2, include = TRUE}
-ggseasonplot(AirPassengers)
+smaller <- diamonds %>% 
+  filter(carat <= 2.5)
 ```
 
 
