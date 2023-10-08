@@ -62,10 +62,6 @@ eventos en particular, o la temperatura del clima muestra su
 comportamiento estacional de días cálidos en verano y días fríos en
 invierno, etc.
 
-``` 2
-ggseasonplot(AirPassengers)
-```
-
 ## Including Plots
 
 You can also embed plots, for example:

@@ -3,10 +3,6 @@ title: "Guía Definitiva para el Marketing Mix Modelling"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Introducción
 
 Ya sea que se trate de una empresa establecida o bastante nueva en el mercado, casi todas las empresas utilizan diferentes canales de marketing como televisión, radio, correo electrónico, redes sociales, etc., para llegar a sus clientes potenciales y aumentar el conocimiento de su producto y, a su vez, maximizar las ventas o ingresos.
@@ -35,7 +31,7 @@ Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en p
 library(forecast)
 ```
 
-```{2}
+```{2, include = FALSE}
 ggseasonplot(AirPassengers)
 ```
 
