@@ -31,21 +31,31 @@ Si observa un ciclo periódico en la serie con frecuencias fijas, entonces puede
 
 Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en particular, o la temperatura del clima muestra su comportamiento estacional de días cálidos en verano y días fríos en invierno, etc.
 
-```{t1, include = FALSE}
-library(ggplot2)
-library(dplyr)
+## Problema 1
 
-smaller <- diamonds %>% 
-  filter(carat <= 2.5)
+La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
+
+1. Proporciona con `R` resumen de los datos. 
+2. Utiliza la función `eda` del paquete `PASWR2` para realizar un análisis exploratorio de la variable `deaths`
+
+
+### Apartado 1
+
+```{r}
+library(PASWR2)
+summary(CARS2004) 
 ```
 
+Como puedes observar, al compilar tu documento aparecen las sentencias de `R` y el output que te da el programa.
 
-## Including Plots
 
-You can also embed plots, for example:
+### Apartado 2
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Ahora vamos a utilizar la función `eda` del paquete `PASWR2` para realizar un análisis exploratorio de la variable `deaths`
+
+```{r}
+eda(CARS2004$deaths)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+En este caso, en tu documento final te aparece el código de `R`, el output numérico de la función `eda` y el output gráfico de la función `eda`.
+

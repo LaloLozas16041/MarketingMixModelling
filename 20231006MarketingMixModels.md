@@ -62,11 +62,65 @@ eventos en particular, o la temperatura del clima muestra su
 comportamiento estacional de días cálidos en verano y días fríos en
 invierno, etc.
 
-## Including Plots
+## Problema 1
 
-You can also embed plots, for example:
+La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
+coches por 1000 habitantes (`cars`), el número total de accidentes con
+víctimas mortales (`deaths`) y la población/1000 (`population`) para los
+25 miembros de la Unión Europea en el año 2004.
 
-![](20231006MarketingMixModels_files/figure-gfm/pressure-1.png)<!-- -->
+1.  Proporciona con `R` resumen de los datos.
+2.  Utiliza la función `eda` del paquete `PASWR2` para realizar un
+    análisis exploratorio de la variable `deaths`
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+### Apartado 1
+
+``` r
+library(PASWR2)
+```
+
+    ## Warning: package 'PASWR2' was built under R version 4.2.3
+
+    ## Loading required package: lattice
+
+    ## Loading required package: ggplot2
+
+    ## Warning: package 'ggplot2' was built under R version 4.2.3
+
+``` r
+summary(CARS2004) 
+```
+
+    ##            country        cars           deaths        population   
+    ##  Austria       : 1   Min.   :222.0   Min.   : 33.0   Min.   :  400  
+    ##  Belgium       : 1   1st Qu.:354.0   1st Qu.: 72.0   1st Qu.: 3446  
+    ##  Cyprus        : 1   Median :448.0   Median :112.0   Median : 8976  
+    ##  Czech Republic: 1   Mean   :432.1   Mean   :111.4   Mean   :18273  
+    ##  Denmark       : 1   3rd Qu.:491.0   3rd Qu.:135.0   3rd Qu.:16258  
+    ##  Estonia       : 1   Max.   :659.0   Max.   :222.0   Max.   :82532  
+    ##  (Other)       :19
+
+Como puedes observar, al compilar tu documento aparecen las sentencias
+de `R` y el output que te da el programa.
+
+### Apartado 2
+
+Ahora vamos a utilizar la función `eda` del paquete `PASWR2` para
+realizar un análisis exploratorio de la variable `deaths`
+
+``` r
+eda(CARS2004$deaths)
+```
+
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+    ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
+    ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 
+    ##      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness 
+    ##  222.000   47.023 2211.167    9.405   63.000  189.000    0.043    0.578 
+    ## SW p-val 
+    ##    0.243
+
+En este caso, en tu documento final te aparece el código de `R`, el
+output numérico de la función `eda` y el output gráfico de la función
+`eda`.
