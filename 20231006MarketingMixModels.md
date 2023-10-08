@@ -55,12 +55,26 @@ frecuencias pueden ser diarias, semanales, mensuales, etc. En palabras
 simples, la estacionalidad siempre es de un período fijo y conocido, lo
 que significa que notará una cantidad de tiempo definida entre los picos
 y los valles de los datos; ergo, a veces, las series de tiempo
-estacionales también se denominan series de tiempo periódicas.
+estacionales también se denominan series de tiempo periódicas. no Por
+ejemplo, las ventas minoristas aumentan en algunos festivales o eventos
+en particular, o la temperatura del clima muestra su comportamiento
+estacional de días cálidos en verano y días fríos en invierno, etc.
 
-Por ejemplo, las ventas minoristas aumentan en algunos festivales o
-eventos en particular, o la temperatura del clima muestra su
-comportamiento estacional de días cálidos en verano y días fríos en
-invierno, etc.
+``` r
+library(forecast)
+```
+
+    ## Warning: package 'forecast' was built under R version 4.2.3
+
+    ## Registered S3 method overwritten by 'quantmod':
+    ##   method            from
+    ##   as.zoo.data.frame zoo
+
+``` r
+ggseasonplot(AirPassengers)
+```
+
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 ## Problema 1
 
@@ -112,7 +126,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 
