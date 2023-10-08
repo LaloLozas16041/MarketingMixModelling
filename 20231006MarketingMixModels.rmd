@@ -31,7 +31,7 @@ Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en p
 library(forecast)
 ```
 
-```{2, include = FALSE}
+```{2, include = TRUE}
 ggseasonplot(AirPassengers)
 ```
 
