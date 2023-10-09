@@ -116,8 +116,13 @@ library(Robyn)
 
 ``` r
 #Step 1.b Setup virtual Environment & Install nevergrad library
-#virtualenv_create("r-reticulate")
-#py_install("nevergrad", pip = TRUE)
+virtualenv_create("r-reticulate")
+```
+
+    ## virtualenv: r-reticulate
+
+``` r
+py_install("nevergrad", pip = TRUE)
 #use_virtualenv("r-reticulate", required = TRUE)
 ```
 
