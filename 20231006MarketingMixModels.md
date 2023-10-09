@@ -103,8 +103,9 @@ autoplot(lynx) + xlab("Anio") + ylab("Número de linces atrapados")
 
 ## Paso 1: Instalar los paquetes adecuados
 
+### Paso 1.a.Primera instalación de los paquetes necesarios, descomentar la primera vez
+
 ``` r
-#Paso 1.a.Primera instalación de los paquetes necesarios, descomentar la primera vez
 #install.packages("Robyn")
 #install.packages("reticulate")
 library(reticulate)
@@ -118,8 +119,9 @@ library(Robyn)
 
     ## Warning: package 'Robyn' was built under R version 4.2.3
 
+### Paso 1.b Configurar el entorno virtual e instalar la biblioteca Nevergrad
+
 ``` r
-#Paso 1.b Configurar el entorno virtual e instalar la biblioteca Nevergrad
 virtualenv_create("r-reticulate")
 ```
 
@@ -130,8 +132,9 @@ py_install("nevergrad", pip = TRUE)
 #use_virtualenv("r-reticulate", required = TRUE) #Descomentar esta parte la primera vez
 ```
 
+### Paso 1.c Importar paquetes y configurar CWD
+
 ``` r
-#Paso 1.c Importar paquetes y configurar CWD
 library(Robyn) 
 library(reticulate)
 set.seed(123)
@@ -198,8 +201,6 @@ siguiente puede ser valioso para ayudar a articular variables
 independientes y de destino para su modelo:
 
 ``` r
-#### Paso 3.1: Especificar Variables de Entrada
-
 InputCollect <- robyn_inputs(
   dt_input = dt_simulated_weekly,
   dt_holidays = dt_prophet_holidays,
@@ -247,6 +248,17 @@ print(InputCollect)
     ## Adstock: geometric
     ## Hyper-parameters: [0;31mNot set yet[0m
 
+#### Signo de coeficientes:
+
+Predeterminado: significa que la variable podría tener coeficientes + o
+– dependiendo del resultado del modelado. Sin embargo,
+Positivo/Negativo: si conoce el impacto específico de una variable de
+entrada en la variable objetivo, entonces Puede elegir el signo en
+consecuencia. Nota: Todos los controles de signos se proporcionan
+automáticamente: “+” para las variables orgánicas y de medios y
+“predeterminado” para todas las demás. No obstante, aún puedes
+personalizar las señales si es necesario.
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -257,6 +269,135 @@ víctimas mortales (`deaths`) y la población/1000 (`population`) para los
 1.  Proporciona con `R` resumen de los datos.
 2.  Utiliza la función `eda` del paquete `PASWR2` para realizar un
     análisis exploratorio de la variable `deaths`
+
+#### Paso 3.2 Especificar nombres y rangos de hiperparámetros
+
+Los hiperparámetros de Robyn tienen cuatro componentes:
+
+Parámetro de validación de series temporales (train_size). Parámetros de
+Adstock (theta o forma/escala). Parámetros de saturación (alfa/gamma).
+Parámetro de regularización (lambda). Especificar nombres de
+hiperparámetros
+
+``` r
+hyper_names(adstock = InputCollect$adstock, all_media = InputCollect$all_media)
+```
+
+    ##  [1] "facebook_S_alphas" "facebook_S_gammas" "facebook_S_thetas"
+    ##  [4] "newsletter_alphas" "newsletter_gammas" "newsletter_thetas"
+    ##  [7] "ooh_S_alphas"      "ooh_S_gammas"      "ooh_S_thetas"     
+    ## [10] "print_S_alphas"    "print_S_gammas"    "print_S_thetas"   
+    ## [13] "search_S_alphas"   "search_S_gammas"   "search_S_thetas"  
+    ## [16] "tv_S_alphas"       "tv_S_gammas"       "tv_S_thetas"
+
+``` r
+## Nota: Establezca plot = TRUE para producir gráficos de ejemplo para
+#adstock e hiperparámetros de saturación.
+
+plot_adstock(plot = FALSE)
+plot_saturation(plot = FALSE)
+
+# Para comprobar los límites máximos inferior y superior
+hyper_limits()
+```
+
+    ##   thetas alphas gammas shapes scales
+    ## 1    >=0     >0     >0    >=0    >=0
+    ## 2     <1    <10    <=1    <20    <=1
+
+``` r
+# Especificar rangos de hiperparámetros para material publicitario geométrico
+hyperparameters <- list(
+  facebook_S_alphas = c(0.5, 3),
+  facebook_S_gammas = c(0.3, 1),
+  facebook_S_thetas = c(0, 0.3),
+  print_S_alphas = c(0.5, 3),
+  print_S_gammas = c(0.3, 1),
+  print_S_thetas = c(0.1, 0.4),
+  tv_S_alphas = c(0.5, 3),
+  tv_S_gammas = c(0.3, 1),
+  tv_S_thetas = c(0.3, 0.8),
+  search_S_alphas = c(0.5, 3),
+  search_S_gammas = c(0.3, 1),
+  search_S_thetas = c(0, 0.3),
+  ooh_S_alphas = c(0.5, 3),
+  ooh_S_gammas = c(0.3, 1),
+  ooh_S_thetas = c(0.1, 0.4),
+  newsletter_alphas = c(0.5, 3),
+  newsletter_gammas = c(0.3, 1),
+  newsletter_thetas = c(0.1, 0.4),
+  train_size = c(0.5, 0.8)
+)
+
+#Agregar hiperparámetros a robyn_inputs()
+
+InputCollect <- robyn_inputs(InputCollect = InputCollect, hyperparameters = hyperparameters)
+```
+
+    ## >> Running feature engineering...
+
+    ## Warning in .font_global(font, quiet = FALSE): Font 'Arial Narrow' is not
+    ## installed, has other name, or can't be found
+
+``` r
+print(InputCollect)
+```
+
+    ## Total Observations: 208 (weeks)
+    ## Input Table Columns (12):
+    ##   Date: DATE
+    ##   Dependent: revenue [revenue]
+    ##   Paid Media: tv_S, ooh_S, print_S, facebook_I, search_clicks_P
+    ##   Paid Media Spend: tv_S, ooh_S, print_S, facebook_S, search_S
+    ##   Context: competitor_sales_B, events
+    ##   Organic: newsletter
+    ##   Prophet (Auto-generated): trend, season, holiday on DE
+    ##   Unused variables: None
+    ## 
+    ## Date Range: 2015-11-23:2019-11-11
+    ## Model Window: 2016-01-04:2018-12-31 (157 weeks)
+    ## With Calibration: FALSE
+    ## Custom parameters: None
+    ## 
+    ## Adstock: geometric
+    ## Hyper-parameters ranges:
+    ##   facebook_S_alphas: [0.5, 3]
+    ##   facebook_S_gammas: [0.3, 1]
+    ##   facebook_S_thetas: [0, 0.3]
+    ##   print_S_alphas: [0.5, 3]
+    ##   print_S_gammas: [0.3, 1]
+    ##   print_S_thetas: [0.1, 0.4]
+    ##   tv_S_alphas: [0.5, 3]
+    ##   tv_S_gammas: [0.3, 1]
+    ##   tv_S_thetas: [0.3, 0.8]
+    ##   search_S_alphas: [0.5, 3]
+    ##   search_S_gammas: [0.3, 1]
+    ##   search_S_thetas: [0, 0.3]
+    ##   ooh_S_alphas: [0.5, 3]
+    ##   ooh_S_gammas: [0.3, 1]
+    ##   ooh_S_thetas: [0.1, 0.4]
+    ##   newsletter_alphas: [0.5, 3]
+    ##   newsletter_gammas: [0.3, 1]
+    ##   newsletter_thetas: [0.1, 0.4]
+    ##   train_size: [0.5, 0.8]
+
+``` r
+##### Guarde InputCollect en el formato de archivo JSON para importarlo más tarde
+robyn_write(InputCollect, dir = "./")
+```
+
+    ## >> Exported model inputs as ./RobynModel-inputs.json
+
+``` r
+InputCollect <- robyn_inputs(
+  dt_input = dt_simulated_weekly,
+  dt_holidays = dt_prophet_holidays,
+  json_file = "./RobynModel-inputs.json")
+```
+
+    ## Imported JSON file succesfully: ./RobynModel-inputs.json
+
+    ## >> Running feature engineering...
 
 ### Apartado 1
 
@@ -293,7 +434,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 
