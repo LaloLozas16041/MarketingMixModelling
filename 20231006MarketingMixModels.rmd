@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Abstract
 
 Ya sea que se trate de una empresa establecida o bastante nueva en el mercado, casi todas las empresas utilizan diferentes canales de marketing como televisión, radio, correo electrónico, redes sociales, etc., para llegar a sus clientes potenciales y aumentar el conocimiento de su producto y, a su vez, maximizar las ventas o ingresos.
-
 Pero con tantos canales de marketing a su disposición, las empresas deben decidir qué canales de marketing son eficaces en comparación con otros y, lo que es más importante, cuánto presupuesto se debe asignar a cada canal. Con el surgimiento del marketing online y varias plataformas y herramientas de big data, el marketing es una de las áreas de oportunidades más destacadas para las aplicaciones de ciencia de datos y aprendizaje automático.
 
 <strong>Objetivos de aprendizaje</strong></p>
@@ -23,9 +22,7 @@ Pero con tantos canales de marketing a su disposición, las empresas deben decid
   <li>Implementación del Marketing Mix Modelling utilizando Robyn.</li>
 </ol>
 
-
 Entonces, sin más preámbulos, demos el primer paso para comprender cómo implementar el Marketing Mix Modelling utilizando la biblioteca Robyn desarrollada por el equipo de Facebook (ahora Meta) y, lo más importante, cómo interpretar los resultados de salida.
-
 
 ## <strong>Índice del Contenido</strong></p>
 
@@ -37,6 +34,21 @@ Entonces, sin más preámbulos, demos el primer paso para comprender cómo imple
   <li> Tendencia </li>
   <li> Estacionalidad </li>
   <li> Ciclicidad </li>
+  <li> Ruido </li>
+  <li> RoAS (retorno de la inversión publicitaria) </li>
+  <li> Publicidad </li>
+  <li> Regresión Ridge </li>
+  <li> Nevergrad </li>
+  <li> Paso 1: Instalar los paquetes adecuados </li>
+  <li> Paso 2: Cargar datos </li>
+  <li> Paso 3: Especificación del modelo </li>
+  <li> Paso 4: Calibración del modelo/Agregar entrada experimental (opcional) </li>
+  <li> Paso 5: construcción del modelo </li>
+  <li> Paso 6: seleccione y guarde un modelo </li>
+  <li> Paso 7: Obtener la asignación del presupuesto según el modelo seleccionado </li>
+  <li> Paso 8: Actualizar el modelo según el modelo seleccionado y los resultados guardados </li>
+  <li> Conclusión </li>
+  <li> Preguntas y Respuestas Frecuentes </li>
 </ol>
 
 ## Estacionalidad
