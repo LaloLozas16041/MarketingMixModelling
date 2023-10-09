@@ -61,7 +61,7 @@ en particular, o la temperatura del clima muestra su comportamiento
 estacional de días cálidos en verano y días fríos en invierno, etc.
 
 ``` r
-library(forecast)
+library(forecast) # Librería clásica de Pronósticos
 ```
 
     ## Warning: package 'forecast' was built under R version 4.2.3
@@ -77,7 +77,7 @@ ggseasonplot(AirPassengers)
 ![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 ``` r
-library(fpp2) 
+library(fpp2) # Librería con la información para ilustrar ***
 ```
 
     ## Warning: package 'fpp2' was built under R version 4.2.3
@@ -96,13 +96,17 @@ library(fpp2)
     ## 
 
 ``` r
-autoplot(lynx) +xlab("Year") +ylab("Number of lynx trapped")
+autoplot(lynx) + xlab("Anio") + ylab("Número de linces atrapados")
 ```
 
 ![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
+## Paso 1: Instalar los paquetes adecuados
+
 ``` r
-#Step 1.a.First Install required Packages
+#Paso 1.a.Primera instalación de los paquetes necesarios, descomentar la primera vez
+#install.packages("Robyn")
+#install.packages("reticulate")
 library(reticulate)
 ```
 
@@ -115,7 +119,7 @@ library(Robyn)
     ## Warning: package 'Robyn' was built under R version 4.2.3
 
 ``` r
-#Step 1.b Setup virtual Environment & Install nevergrad library
+#Paso 1.b Configurar el entorno virtual e instalar la biblioteca Nevergrad
 virtualenv_create("r-reticulate")
 ```
 
@@ -123,11 +127,11 @@ virtualenv_create("r-reticulate")
 
 ``` r
 py_install("nevergrad", pip = TRUE)
-#use_virtualenv("r-reticulate", required = TRUE)
+#use_virtualenv("r-reticulate", required = TRUE) #Descomentar esta parte la primera vez
 ```
 
 ``` r
-#Step 1.c Import packages & set CWD
+#Paso 1.c Importar paquetes y configurar CWD
 library(Robyn) 
 library(reticulate)
 set.seed(123)
@@ -136,12 +140,12 @@ setwd('MMM')
 ```
 
 ``` r
-#Step 1.d You can force multi-core usage by running below line of code
-#Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
-#options(future.fork.enable = TRUE)
+#Paso 1.d Puedes forzar el uso de múltiples núcleos ejecutando la siguiente línea de código
+Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
+options(future.fork.enable = TRUE)
 
-# You can set create_files to FALSE to avoid the creation of files locally
-#create_files <- TRUE
+# Puedes configurar create_files en FALSE para evitar la creación de archivos localmente
+create_files <- TRUE
 ```
 
 ## Problema 1

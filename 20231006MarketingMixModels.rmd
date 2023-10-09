@@ -32,30 +32,34 @@ no
 Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en particular, o la temperatura del clima muestra su comportamiento estacional de días cálidos en verano y días fríos en invierno, etc.
 
 ```{r}
-library(forecast)
+library(forecast) # Librería clásica de Pronósticos
 ggseasonplot(AirPassengers)
 ```
 
 ```{r}
-library(fpp2) 
-autoplot(lynx) +xlab("Year") +ylab("Number of lynx trapped")
+library(fpp2) # Librería con la información para ilustrar ***
+autoplot(lynx) + xlab("Anio") + ylab("Número de linces atrapados")
 ```
 
+## Paso 1: Instalar los paquetes adecuados
+
 ```{r}
-#Step 1.a.First Install required Packages
+#Paso 1.a.Primera instalación de los paquetes necesarios, descomentar la primera vez
+#install.packages("Robyn")
+#install.packages("reticulate")
 library(reticulate)
 library(Robyn)
 ```
 
 ```{r}
-#Step 1.b Setup virtual Environment & Install nevergrad library
+#Paso 1.b Configurar el entorno virtual e instalar la biblioteca Nevergrad
 virtualenv_create("r-reticulate")
 py_install("nevergrad", pip = TRUE)
-#use_virtualenv("r-reticulate", required = TRUE)
+#use_virtualenv("r-reticulate", required = TRUE) #Descomentar esta parte la primera vez
 ```
 
 ```{r}
-#Step 1.c Import packages & set CWD
+#Paso 1.c Importar paquetes y configurar CWD
 library(Robyn) 
 library(reticulate)
 set.seed(123)
@@ -64,12 +68,12 @@ setwd('MMM')
 ```
 
 ```{r}
-#Step 1.d You can force multi-core usage by running below line of code
-#Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
-#options(future.fork.enable = TRUE)
+#Paso 1.d Puedes forzar el uso de múltiples núcleos ejecutando la siguiente línea de código
+Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
+options(future.fork.enable = TRUE)
 
-# You can set create_files to FALSE to avoid the creation of files locally
-#create_files <- TRUE
+# Puedes configurar create_files en FALSE para evitar la creación de archivos localmente
+create_files <- TRUE
 ```
 
 ## Problema 1
