@@ -126,6 +126,24 @@ py_install("nevergrad", pip = TRUE)
 #use_virtualenv("r-reticulate", required = TRUE)
 ```
 
+``` r
+#Step 1.c Import packages & set CWD
+library(Robyn) 
+library(reticulate)
+set.seed(123)
+
+setwd('MMM')
+```
+
+``` r
+#Step 1.d You can force multi-core usage by running below line of code
+#Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
+#options(future.fork.enable = TRUE)
+
+# You can set create_files to FALSE to avoid the creation of files locally
+#create_files <- TRUE
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -172,7 +190,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 

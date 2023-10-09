@@ -53,6 +53,25 @@ virtualenv_create("r-reticulate")
 py_install("nevergrad", pip = TRUE)
 #use_virtualenv("r-reticulate", required = TRUE)
 ```
+
+```{r}
+#Step 1.c Import packages & set CWD
+library(Robyn) 
+library(reticulate)
+set.seed(123)
+
+setwd('MMM')
+```
+
+```{r}
+#Step 1.d You can force multi-core usage by running below line of code
+#Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
+#options(future.fork.enable = TRUE)
+
+# You can set create_files to FALSE to avoid the creation of files locally
+#create_files <- TRUE
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
