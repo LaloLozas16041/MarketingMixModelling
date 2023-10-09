@@ -148,6 +148,17 @@ options(future.fork.enable = TRUE)
 create_files <- TRUE
 ```
 
+## Paso 2: Cargar Datos
+
+``` r
+#Paso 1.d Puedes forzar el uso de múltiples núcleos ejecutando la siguiente línea de código
+Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
+options(future.fork.enable = TRUE)
+
+# Puedes configurar create_files en FALSE para evitar la creación de archivos localmente
+create_files <- TRUE
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -194,7 +205,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 

@@ -76,6 +76,21 @@ options(future.fork.enable = TRUE)
 create_files <- TRUE
 ```
 
+## Paso 2: Cargar Datos
+
+```{r}
+#Step 2.a Load data
+data("dt_simulated_weekly")
+head(dt_simulated_weekly)
+
+#Step 2.b Load holidays data from Prophet
+data("dt_prophet_holidays")
+head(dt_prophet_holidays)
+
+# Export results to desired directory.
+robyn_object<- "~/MyRobyn.RDS"
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
