@@ -114,6 +114,13 @@ library(Robyn)
 
     ## Warning: package 'Robyn' was built under R version 4.2.3
 
+``` r
+#Step 1.b Setup virtual Environment & Install nevergrad library
+#virtualenv_create("r-reticulate")
+#py_install("nevergrad", pip = TRUE)
+#use_virtualenv("r-reticulate", required = TRUE)
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -160,7 +167,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 

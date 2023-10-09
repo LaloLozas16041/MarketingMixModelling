@@ -47,6 +47,12 @@ library(reticulate)
 library(Robyn)
 ```
 
+```{r}
+#Step 1.b Setup virtual Environment & Install nevergrad library
+#virtualenv_create("r-reticulate")
+#py_install("nevergrad", pip = TRUE)
+#use_virtualenv("r-reticulate", required = TRUE)
+```
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
