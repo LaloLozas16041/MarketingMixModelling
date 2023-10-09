@@ -197,6 +197,56 @@ Dado que Robyn es una herramienta semiautomática, usar una tabla como la
 siguiente puede ser valioso para ayudar a articular variables
 independientes y de destino para su modelo:
 
+``` r
+#### Paso 3.1: Especificar Variables de Entrada
+
+InputCollect <- robyn_inputs(
+  dt_input = dt_simulated_weekly,
+  dt_holidays = dt_prophet_holidays,
+  dep_var = "revenue",
+  dep_var_type = "revenue",
+  date_var = "DATE",
+  prophet_country = "DE",
+  prophet_vars = c("trend", "season", "holiday"), 
+  context_vars = c("competitor_sales_B", "events"),
+  paid_media_vars = c("tv_S", "ooh_S", "print_S", "facebook_I", "search_clicks_P"),
+  paid_media_spends = c("tv_S", "ooh_S", "print_S", "facebook_S", "search_S"),
+  organic_vars = "newsletter", 
+  # factor_vars = c("events"),
+  adstock = "geometric", 
+  window_start = "2016-01-01",
+  window_end = "2018-12-31",
+  
+)
+```
+
+    ## Automatically set these variables as 'factor_vars': "events"
+
+    ## Input 'window_start' is adapted to the closest date contained in input data: 2016-01-04
+
+``` r
+print(InputCollect)
+```
+
+    ## Total Observations: 208 (weeks)
+    ## Input Table Columns (12):
+    ##   Date: DATE
+    ##   Dependent: revenue [revenue]
+    ##   Paid Media: tv_S, ooh_S, print_S, facebook_I, search_clicks_P
+    ##   Paid Media Spend: tv_S, ooh_S, print_S, facebook_S, search_S
+    ##   Context: competitor_sales_B, events
+    ##   Organic: newsletter
+    ##   Prophet (Auto-generated): trend, season, holiday on DE
+    ##   Unused variables: None
+    ## 
+    ## Date Range: 2015-11-23:2019-11-11
+    ## Model Window: 2016-01-04:2018-12-31 (157 weeks)
+    ## With Calibration: FALSE
+    ## Custom parameters: None
+    ## 
+    ## Adstock: geometric
+    ## Hyper-parameters: [0;31mNot set yet[0m
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -243,7 +293,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 
