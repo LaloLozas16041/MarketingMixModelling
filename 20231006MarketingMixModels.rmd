@@ -267,6 +267,105 @@ OutputCollect <- robyn_outputs(
 print(OutputCollect)
 ```
 
+## Paso 6: seleccione y guarde un modelo
+
+Puede comparar todos los modelos exportados de una sola página en el último paso y seleccionar uno que refleje principalmente la realidad de su negocio.
+
+```{r}
+## Compare todos los modelos de páginas únicas y seleccione uno que refleje en gran medida la realidad de su negocio.
+print(OutputCollect)
+select_model <- "4_153_2"
+
+ExportedModel <- robyn_write(InputCollect, OutputCollect, select_model, export = create_files)
+print(ExportedModel)
+```
+## Paso 7: Obtener la asignación del presupuesto según el modelo seleccionado
+
+Los resultados de los cuadros de asignación presupuestaria necesitan una mayor validación. Por lo tanto, siempre debe consultar las recomendaciones presupuestarias y discutirlas con su cliente.
+
+Puede aplicar la función robyn_allocator() a cada modelo seleccionado para obtener la combinación de presupuesto óptima que maximice la respuesta.
+
+A continuación se detallan los 2 escenarios para los que puede optimizar:
+
+Respuesta histórica máxima: simula la asignación presupuestaria óptima que maximizará la efectividad o la respuesta (por ejemplo, ventas, ingresos, etc.), suponiendo el mismo gasto histórico;
+Respuesta máxima para gasto esperado: Esto simula la asignación de presupuesto óptima para maximizar la respuesta o efectividad, donde puedes definir cuánto quieres gastar.
+Para el escenario de "respuesta histórica máxima", consideremos el siguiente caso de uso:
+
+Caso 1: cuando tanto el presupuesto_total como el rango_de_fechas son NULL.
+Nota: Es el valor predeterminado para el gasto del último mes.
+
+```{r}
+print(OutputCollect)
+# Obtener asignación de presupuesto basada en el modelo seleccionado arriba
+
+# Verifique el resumen de medios para el modelo seleccionado
+print(ExportedModel)
+
+# NOTE: The order of constraints should follow:
+InputCollect$paid_media_spends
+
+AllocatorCollect1 <- robyn_allocator(
+  InputCollect = InputCollect,
+  OutputCollect = OutputCollect,
+  select_model = select_model,
+  date_range = NULL,
+  scenario = "max_historical_response",
+  channel_constr_low = 0.7,
+  channel_constr_up = c(1.2, 1.5, 1.5, 1.5, 1.5),
+  channel_constr_multiplier = 3,
+  export = create_files
+)
+# Print the budget allocator output summary
+print(AllocatorCollect1)
+
+# Plot the budget allocator one-pager
+plot(AllocatorCollect1)
+```
+
+## Paso 8: Actualizar el modelo según el modelo seleccionado y los resultados guardados
+Las dos situaciones siguientes encajan bien:
+
+La mayoría de los datos son nuevos. Por ejemplo, si el modelo anterior tiene 200 semanas de datos y 100 semanas, se agregan datos nuevos.
+Agregue nuevas variables o funciones de entrada.
+
+```{r}
+# Provide your InputCollect JSON file and ExportedModel specifications
+
+json_file <- "/MMM/RobynModel-inputs.json"
+
+RobynRefresh <- robyn_refresh(
+  json_file = json_file,
+  dt_input = dt_simulated_weekly,
+  dt_holidays = dt_prophet_holidays,
+  refresh_iters = 1500, 
+  refresh_trials = 2
+  refresh_steps = 14,
+)
+# Now refreshing a refreshed model following the same approach
+json_file_rf1 <- "/MMM/RobynModel-inputs.json"
+
+RobynRefresh <- robyn_refresh(
+  json_file = json_file_rf1,
+  dt_input = dt_simulated_weekly,
+  dt_holidays = dt_prophet_holidays,
+  refresh_steps = 8,
+  refresh_iters = 1000,
+  refresh_trials = 2
+)
+
+# Continue with new select_model,InputCollect,,and OutputCollect values
+InputCollectX <- RobynRefresh$listRefresh1$InputCollect
+OutputCollectX <- RobynRefresh$listRefresh1$OutputCollect
+select_modelX <- RobynRefresh$listRefresh1$OutputCollect$selectID
+```
+
+```{r}
+report_hyperparameters.csv,
+report_aggregated.csv,
+report_media_transform_matrix.csv,
+report_alldecomp_matrix.csv
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
@@ -274,6 +373,15 @@ La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por
 1. Proporciona con `R` resumen de los datos. 
 2. Utiliza la función `eda` del paquete `PASWR2` para realizar un análisis exploratorio de la variable `deaths`
 
+## Conclusión
+
+Robyn, con sus características destacadas como calibración y actualización de modelos, rendimientos marginales y funciones de asignación de presupuesto para producir resultados de modelado de mezcla de marketing (MMM) e información empresarial más rápidos y precisos, hace un gran trabajo. Reduce el sesgo humano en el proceso de modelado al automatizar la mayoría de las tareas importantes.
+
+Las 3 conclusiones importantes de este artículo son las siguientes:
+
+Con la llegada de Nevergrad, Robyn encuentra los hiperparámetros óptimos sin mucha intervención humana.
+Con la llegada de Nevergrad, Robyn encuentra los hiperparámetros óptimos sin mucha intervención humana.
+Robyn nos ayuda a capturar nuevos patrones en los datos con modelos MMM actualizados periódicamente.
 
 ### Apartado 1
 
