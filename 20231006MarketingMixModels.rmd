@@ -209,6 +209,64 @@ calibration_input <- data.frame(
 InputCollect <- robyn_inputs(InputCollect = InputCollect, calibration_input = calibration_input)
 ```
 
+## Paso 5: construcción del modelo
+
+### Paso 5.1 Construir el modelo de referencia
+
+Siempre puede modificar las pruebas y el número de iteraciones según las necesidades de su negocio para obtener la mayor precisión. Puede ejecutar ?robyn_run para verificar la definición de parámetros.
+
+```{r}
+#Construir un modelo inicial
+
+OutputModels <- robyn_run(
+  InputCollect = InputCollect,
+  cores = NULL,
+  iterations = 2000,
+  trials = 5,
+  ts_validation = TRUE,
+  add_penalty_factor = FALSE
+)
+print(OutputModels)
+```
+
+### Paso 5.2 Agrupación de soluciones modelo
+
+Robyn utiliza la agrupación K-Means en cada variable de medios (pagos) para encontrar los "mejores modelos" que tengan NRMSE, DECOM.RSSD y MAPE (si se utilizó calibrado).
+
+### Paso 5.3 Descomposición de la estacionalidad del profeta
+
+Robyn utiliza Prophet para mejorar el ajuste del modelo y la capacidad de pronosticar. Si no está seguro de qué líneas base deben incluirse en el modelado, puede consultar la siguiente descripción:
+
+Tendencia: Movimiento a largo plazo y de evolución lenta (dirección creciente o decreciente) a lo largo del tiempo.
+Estacionalidad: Capture el comportamiento estacional en un ciclo de corto plazo, por ej. anual.
+Día laborable: supervise el comportamiento repetitivo semanalmente, si hay datos diarios disponibles.
+Día festivo/evento: eventos importantes o días festivos que tienen un gran impacto en su variable objetivo.
+
+### Paso 5.4 Selección del modelo
+
+Robyn aprovecha MOO de Nevergrad para su paso de selección de modelo al devolver automáticamente un conjunto de resultados óptimos. Robyn aprovecha Nevergrad para lograr dos objetivos principales:
+
+Ajuste del modelo: tiene como objetivo minimizar el error de predicción del modelo, es decir, NRMSE.
+Business Fit: tiene como objetivo minimizar la distancia de descomposición, es decir, la distancia de descomposición raíz cuadrada (DECOMP.RSSD). Esta métrica de distancia es para la relación entre el porcentaje de gasto y el porcentaje de descomposición del coeficiente de un canal. Si la distancia es demasiado grande entonces su resultado puede ser demasiado irreal -Por ej. canal publicitario con el menor gasto obteniendo el mayor efecto. Entonces esto parece poco realista.
+Puede ver en el siguiente cuadro cómo Nevergrad rechaza el máximo de "modelos malos" (error de predicción mayor y/o efecto mediático poco realista). Cada punto azul en el gráfico representa una solución modelo explorada.
+
+### Paso 5.5 Exportar resultados del modelo
+## Calcule frentes de Pareto, agrupe y exporte resultados y gráficos.
+
+```{r}
+OutputCollect <- robyn_outputs(
+  InputCollect, OutputModels,
+  csv_out = "pareto",
+  pareto_fronts = "auto",
+  clusters = TRUE,
+  export = create_files,
+  plot_pareto = create_files,
+  plot_folder = robyn_object
+
+)
+print(OutputCollect)
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
