@@ -79,17 +79,23 @@ create_files <- TRUE
 ## Paso 2: Cargar Datos
 
 ```{r}
-#Step 2.a Load data
+#Paso 2.a Cargar datos
 data("dt_simulated_weekly")
 head(dt_simulated_weekly)
 
-#Step 2.b Load holidays data from Prophet
+#Paso 2.b Cargar datos de vacaciones desde Prophet
 data("dt_prophet_holidays")
 head(dt_prophet_holidays)
 
-# Export results to desired directory.
+# Exportar resultados al directorio deseado
 robyn_object<- "~/MyRobyn.RDS"
 ```
+
+## Paso 3: Especificación del Modelo
+
+### Paso 3.1 Definir variables de entrada
+
+Dado que Robyn es una herramienta semiautomática, usar una tabla como la siguiente puede ser valioso para ayudar a articular variables independientes y de destino para su modelo:
 
 ## Problema 1
 

@@ -151,13 +151,51 @@ create_files <- TRUE
 ## Paso 2: Cargar Datos
 
 ``` r
-#Paso 1.d Puedes forzar el uso de múltiples núcleos ejecutando la siguiente línea de código
-Sys.setenv(R_FUTURE_FORK_ENABLE = "true")
-options(future.fork.enable = TRUE)
-
-# Puedes configurar create_files en FALSE para evitar la creación de archivos localmente
-create_files <- TRUE
+#Paso 2.a Cargar datos
+data("dt_simulated_weekly")
+head(dt_simulated_weekly)
 ```
+
+    ## # A tibble: 6 × 12
+    ##   DATE        revenue    tv_S  ooh_S print_S facebook_I search_clicks_P search_S
+    ##   <date>        <dbl>   <dbl>  <dbl>   <dbl>      <dbl>           <dbl>    <dbl>
+    ## 1 2015-11-23 2754372.  67075. 0       38185.  72903853.              0         0
+    ## 2 2015-11-30 2584277.  85840. 0           0   16581100.          29512.    12400
+    ## 3 2015-12-07 2547387.      0  3.97e5   1362.  49954774.          36132.    11360
+    ## 4 2015-12-14 2875220  250351. 0       53040   31649297.          36804.    12760
+    ## 5 2015-12-21 2215953.      0  8.32e5      0    8802269.          28402.    10840
+    ## 6 2015-12-28 2569922.  99676. 0       95767.  49902081.          38062.    11320
+    ## # ℹ 4 more variables: competitor_sales_B <int>, facebook_S <dbl>, events <chr>,
+    ## #   newsletter <dbl>
+
+``` r
+#Paso 2.b Cargar datos de vacaciones desde Prophet
+data("dt_prophet_holidays")
+head(dt_prophet_holidays)
+```
+
+    ## # A tibble: 6 × 4
+    ##   ds         holiday                                               country  year
+    ##   <date>     <chr>                                                 <chr>   <int>
+    ## 1 1995-01-01 Ano Nuevo [New Year's Day]                            AR       1995
+    ## 2 1995-02-27 Dia de Carnaval [Carnival's Day]                      AR       1995
+    ## 3 1995-02-28 Dia de Carnaval [Carnival's Day]                      AR       1995
+    ## 4 1995-03-24 Dia Nacional de la Memoria por la Verdad y la Justic… AR       1995
+    ## 5 1995-04-02 Dia del Veterano y de los Caidos en la Guerra de Mal… AR       1995
+    ## 6 1995-04-13 Semana Santa (Jueves Santo)  [Holy day (Holy Thursda… AR       1995
+
+``` r
+# Exportar resultados al directorio deseado
+robyn_object<- "~/MyRobyn.RDS"
+```
+
+## Paso 3: Especificación del Modelo
+
+### Paso 3.1 Definir variables de entrada
+
+Dado que Robyn es una herramienta semiautomática, usar una tabla como la
+siguiente puede ser valioso para ayudar a articular variables
+independientes y de destino para su modelo:
 
 ## Problema 1
 
