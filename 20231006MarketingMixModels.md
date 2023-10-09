@@ -101,6 +101,19 @@ autoplot(lynx) +xlab("Year") +ylab("Number of lynx trapped")
 
 ![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
+``` r
+#Step 1.a.First Install required Packages
+library(reticulate)
+```
+
+    ## Warning: package 'reticulate' was built under R version 4.2.3
+
+``` r
+library(Robyn)
+```
+
+    ## Warning: package 'Robyn' was built under R version 4.2.3
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -147,7 +160,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 
