@@ -76,6 +76,31 @@ ggseasonplot(AirPassengers)
 
 ![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
+``` r
+library(fpp2) 
+```
+
+    ## Warning: package 'fpp2' was built under R version 4.2.3
+
+    ## ── Attaching packages ────────────────────────────────────────────── fpp2 2.5 ──
+
+    ## ✔ ggplot2   3.4.2     ✔ expsmooth 2.3  
+    ## ✔ fma       2.5
+
+    ## Warning: package 'ggplot2' was built under R version 4.2.3
+
+    ## Warning: package 'fma' was built under R version 4.2.3
+
+    ## Warning: package 'expsmooth' was built under R version 4.2.3
+
+    ## 
+
+``` r
+autoplot(lynx) +xlab("Year") +ylab("Number of lynx trapped")
+```
+
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
@@ -96,10 +121,6 @@ library(PASWR2)
     ## Warning: package 'PASWR2' was built under R version 4.2.3
 
     ## Loading required package: lattice
-
-    ## Loading required package: ggplot2
-
-    ## Warning: package 'ggplot2' was built under R version 4.2.3
 
 ``` r
 summary(CARS2004) 
@@ -126,7 +147,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 

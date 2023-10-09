@@ -36,6 +36,11 @@ library(forecast)
 ggseasonplot(AirPassengers)
 ```
 
+```{r}
+library(fpp2) 
+autoplot(lynx) +xlab("Year") +ylab("Number of lynx trapped")
+```
+
 ## Problema 1
 
 La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
