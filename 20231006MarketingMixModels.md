@@ -259,17 +259,6 @@ automáticamente: “+” para las variables orgánicas y de medios y
 “predeterminado” para todas las demás. No obstante, aún puedes
 personalizar las señales si es necesario.
 
-## Problema 1
-
-La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
-coches por 1000 habitantes (`cars`), el número total de accidentes con
-víctimas mortales (`deaths`) y la población/1000 (`population`) para los
-25 miembros de la Unión Europea en el año 2004.
-
-1.  Proporciona con `R` resumen de los datos.
-2.  Utiliza la función `eda` del paquete `PASWR2` para realizar un
-    análisis exploratorio de la variable `deaths`
-
 #### Paso 3.2 Especificar nombres y rangos de hiperparámetros
 
 Los hiperparámetros de Robyn tienen cuatro componentes:
@@ -399,6 +388,61 @@ InputCollect <- robyn_inputs(
 
     ## >> Running feature engineering...
 
+## Paso 4: Calibración del modelo/Agregar entrada experimental (opcional)
+
+Puede utilizar la función de Calibración de Robyn para aumentar la
+confianza al seleccionar su modelo final, especialmente cuando no tiene
+información sobre la efectividad y el rendimiento del medio de antemano.
+Robyn utiliza estudios de incremento (grupo de prueba versus grupo de
+control seleccionado al azar) para comprender la causalidad de su
+marketing en las ventas (y otros KPI) y evaluar el impacto incremental
+de los anuncios.
+
+``` r
+calibration_input <- data.frame(
+  liftStartDate = as.Date(c("2018-05-01", "2018-04-03", "2018-07-01", "2017-12-01")),
+  liftEndDate = as.Date(c("2018-06-10", "2018-06-03", "2018-07-20", "2017-12-31")),
+  liftAbs = c(400000, 300000, 700000, 200),
+  channel = c("facebook_S",  "tv_S", "facebook_S+search_S", "newsletter"),
+  spend = c(421000, 7100, 350000, 0),
+  confidence = c(0.85, 0.8, 0.99, 0.95),
+  calibration_scope = c("immediate", "immediate", "immediate", "immediate"),
+  metric = c("revenue", "revenue", "revenue", "revenue")
+
+)
+InputCollect <- robyn_inputs(InputCollect = InputCollect, calibration_input = calibration_input)
+```
+
+    ## Warning in check_calibration(dt_input = InputCollect$dt_input, date_var =
+    ## InputCollect$date_var, : Your calibration's spend (421,000) for facebook_S
+    ## between 2018-05-01 and 2018-06-10 does not match your dt_input spend (~42.15K).
+    ## Please, check again your dates or split your media inputs into separate media
+    ## channels.
+
+    ## Warning in check_calibration(dt_input = InputCollect$dt_input, date_var =
+    ## InputCollect$date_var, : Your calibration's spend (7,100) for tv_S between
+    ## 2018-04-03 and 2018-06-03 does not match your dt_input spend (~2.841K). Please,
+    ## check again your dates or split your media inputs into separate media channels.
+
+    ## Warning in check_calibration(dt_input = InputCollect$dt_input, date_var =
+    ## InputCollect$date_var, : Your calibration's spend (350,000) for
+    ## facebook_S+search_S between 2018-07-01 and 2018-07-20 does not match your
+    ## dt_input spend (~67.04K). Please, check again your dates or split your media
+    ## inputs into separate media channels.
+
+    ## >> Running feature engineering...
+
+## Problema 1
+
+La base de datos `CARS2004` del paquete `PASWR2` recoge el número de
+coches por 1000 habitantes (`cars`), el número total de accidentes con
+víctimas mortales (`deaths`) y la población/1000 (`population`) para los
+25 miembros de la Unión Europea en el año 2004.
+
+1.  Proporciona con `R` resumen de los datos.
+2.  Utiliza la función `eda` del paquete `PASWR2` para realizar un
+    análisis exploratorio de la variable `deaths`
+
 ### Apartado 1
 
 ``` r
@@ -434,7 +478,7 @@ realizar un análisis exploratorio de la variable `deaths`
 eda(CARS2004$deaths)
 ```
 
-![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](20231006MarketingMixModels_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
     ## Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
     ##   25.000    0.000   33.000   72.000  111.400  112.000  110.000  135.000 
