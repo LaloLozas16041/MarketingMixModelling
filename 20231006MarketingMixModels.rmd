@@ -7,7 +7,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introducción
+## Abstract
 
 Ya sea que se trate de una empresa establecida o bastante nueva en el mercado, casi todas las empresas utilizan diferentes canales de marketing como televisión, radio, correo electrónico, redes sociales, etc., para llegar a sus clientes potenciales y aumentar el conocimiento de su producto y, a su vez, maximizar las ventas o ingresos.
 
@@ -26,10 +26,24 @@ Pero con tantos canales de marketing a su disposición, las empresas deben decid
 
 Entonces, sin más preámbulos, demos el primer paso para comprender cómo implementar el Marketing Mix Modelling utilizando la biblioteca Robyn desarrollada por el equipo de Facebook (ahora Meta) y, lo más importante, cómo interpretar los resultados de salida.
 
+
+## <strong>Índice del Contenido</strong></p>
+
+<ol>
+  <li> Introducción </li>
+  <li> Marketing Mix Modelling (MMM) </li>
+  <li> ¿Qué es Robyn? </li>
+  <li> Los Componentes de las Series de Tiempo </li>
+  <li> Tendencia </li>
+  <li> Estacionalidad </li>
+  <li> Ciclicidad </li>
+</ol>
+
 ## Estacionalidad
+
 Si observa un ciclo periódico en la serie con frecuencias fijas, entonces puede decir que hay una estacionalidad en los datos. Estas frecuencias pueden ser diarias, semanales, mensuales, etc. En palabras simples, la estacionalidad siempre es de un período fijo y conocido, lo que significa que notará una cantidad de tiempo definida entre los picos y los valles de los datos; ergo, a veces, las series de tiempo estacionales también se denominan series de tiempo periódicas.
-no
 Por ejemplo, las ventas minoristas aumentan en algunos festivales o eventos en particular, o la temperatura del clima muestra su comportamiento estacional de días cálidos en verano y días fríos en invierno, etc.
+
 
 ```{r}
 library(forecast) # Librería clásica de Pronósticos
@@ -366,13 +380,6 @@ report_media_transform_matrix.csv,
 report_alldecomp_matrix.csv
 ```
 
-## Problema 1
-
-La base de datos `CARS2004` del paquete `PASWR2` recoge el número de coches por 1000 habitantes (`cars`), el número total de accidentes con víctimas mortales (`deaths`) y la población/1000 (`population`) para los 25 miembros de la Unión Europea en el año 2004.
-
-1. Proporciona con `R` resumen de los datos. 
-2. Utiliza la función `eda` del paquete `PASWR2` para realizar un análisis exploratorio de la variable `deaths`
-
 ## Conclusión
 
 Robyn, con sus características destacadas como calibración y actualización de modelos, rendimientos marginales y funciones de asignación de presupuesto para producir resultados de modelado de mezcla de marketing (MMM) e información empresarial más rápidos y precisos, hace un gran trabajo. Reduce el sesgo humano en el proceso de modelado al automatizar la mayoría de las tareas importantes.
@@ -383,23 +390,4 @@ Con la llegada de Nevergrad, Robyn encuentra los hiperparámetros óptimos sin m
 Con la llegada de Nevergrad, Robyn encuentra los hiperparámetros óptimos sin mucha intervención humana.
 Robyn nos ayuda a capturar nuevos patrones en los datos con modelos MMM actualizados periódicamente.
 
-### Apartado 1
-
-```{r}
-library(PASWR2)
-summary(CARS2004) 
-```
-
-Como puedes observar, al compilar tu documento aparecen las sentencias de `R` y el output que te da el programa.
-
-
-### Apartado 2
-
-Ahora vamos a utilizar la función `eda` del paquete `PASWR2` para realizar un análisis exploratorio de la variable `deaths`
-
-```{r}
-eda(CARS2004$deaths)
-```
-
-En este caso, en tu documento final te aparece el código de `R`, el output numérico de la función `eda` y el output gráfico de la función `eda`.
-
+`eda`, `deaths`
